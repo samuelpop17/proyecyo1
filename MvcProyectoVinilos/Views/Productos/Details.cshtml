@@ -1,0 +1,100 @@
+﻿@model Producto
+
+@{
+    ViewData["Title"] = "Detalles del Producto";
+}
+
+<style>
+    body {
+        background-image: url('https://i.ibb.co/znGwkc1/fondo-Register.jpg'); /* Ruta de la imagen de fondo */
+        background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
+        background-position: center; /* La imagen de fondo se centrará horizontalmente y verticalmente */
+    }
+
+    .cont {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 85vh;
+        
+    }
+
+    .welcome-card {
+        width: 70%;
+        display: flex;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        background-color: white;
+    }
+
+    .lado-izquierdo {
+        width: 50%;
+    }
+
+    .lado-derecho {
+        width: 50%;
+        height:100%;
+        padding-left: 20px; /* Espacio entre la imagen y el texto */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        .lado-derecho h2 {
+            font-size: 60px; /* Tamaño de letra más grande */
+            color: black; /* Color negro */
+            margin-bottom: 10px; /* Espacio después del título */
+            padding:20px;
+            font-weight:bold;        }
+
+        .lado-derecho h5 {
+            font-size: 40px; /* Tamaño de letra más grande */
+            color: black; /* Color negro */
+            margin-bottom: 10px; /* Espacio después de cada párrafo */
+            padding-top:25px;
+        }
+
+
+    .lado-izquierdo img {
+        width: 100%; /* La imagen ocupa todo el ancho disponible del lado izquierdo */
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .lado-derecho a {
+        display: inline-block;
+        padding: 10px 20px; /* Espacio alrededor del texto */
+        background-color: #007bff; /* Color de fondo del botón */
+        color: white; /* Color del texto */
+        text-decoration: none; /* Elimina el subrayado del enlace */
+        border: none; /* Elimina el borde del botón */
+        border-radius: 5px; /* Bordes redondeados */
+        font-size: 18px; /* Tamaño de letra */
+        cursor: pointer; /* Cambia el cursor al pasar por encima */
+        margin-top: 20px; /* Espacio superior */
+        width: calc(100% - 40px); /* Ocupa casi todo el ancho del div con un pequeño margen */
+        text-align: center; /* Centra el texto dentro del botón */
+    }
+
+        .lado-derecho a:hover {
+            background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor */
+        }
+</style>
+
+
+<div class="cont">
+    <div class="welcome-card">
+        <div class="lado-izquierdo">
+            <img src="@Model.Imagen" alt="@Model.Nombre">
+        </div>
+        <div class="lado-derecho">
+            <h2>@Model.Nombre</h2>
+            <h5>Precio: $@Model.Precio</h5>
+            <h5>Descripción: @Model.Descripcion</h5>
+            <a asp-controller="" asp-action="">Añadir al carro</a>
+        </div>
+    </div>
+</div>
+

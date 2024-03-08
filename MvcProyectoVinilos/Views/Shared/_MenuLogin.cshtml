@@ -1,0 +1,23 @@
+﻿@{
+    // Obtener el valor del claim "id" del usuario autenticado
+    var userIdClaim = User.FindFirst("id");
+    var userId = userIdClaim?.Value;
+
+    var userRolClaim = User.FindFirst("rol");
+    var userRol = userRolClaim?.Value;
+
+    var userNameClaim = User.FindFirst("name");
+    var userName = userNameClaim?.Value;
+
+}
+
+﻿﻿@if (Context.User.Identity.IsAuthenticated == false)
+{
+    <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">LogIn</a>
+}
+else
+{
+    <span>Hola @userName  </span>
+    <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Cerrar sesión</a>
+    <a class="nav-link text-dark" asp-controller="Account" asp-action="Perfil" asp-route-id="@int.Parse(userId)">Perfil</a>
+}

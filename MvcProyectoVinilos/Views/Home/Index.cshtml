@@ -1,0 +1,259 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    
+    
+    #imagenHome {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Recorta la imagen para que ocupe todo el ancho sin distorsionarse */
+        display: block;
+    }
+
+    #textoEncima {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 24px;
+        text-align: center;
+        z-index: 1; /* Coloca el texto encima de la imagen */
+    }
+    .containerImage {
+        position: relative;
+        width: 100%;
+        height: 40vh; /* Establece el alto al 30% de la altura de la ventana */
+        overflow: hidden;
+        margin-bottom:30px;        /
+    }
+
+    .text-center {
+        text-align: center;
+    }
+    main{
+        background-color: #007ce8;
+    }
+
+    .cont {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        text-align:center;
+        background-color: white;
+    }
+    h2{
+        margin: 50px;
+        font-size: 35px;
+        font-weight: 600;
+        color: #007ce8;
+    }
+
+
+    /*formulario sugerencias*/
+
+    .form-login {
+       
+        text-align:center;
+        width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-image: url('https://i.ibb.co/vZZszYc/col.jpg'); /* Ruta de la imagen de fondo */
+        background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
+        background-position: center; /* La imagen de fondo se centrará horizontalmente y verticalmente */ /* Color de fondo */
+        border: 1px solid #ced4da; /* Borde */
+        border-radius: 5px; /* Bordes redondeados */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombreado */
+    }
+
+        .form-login h2 {
+            color: #ffcc4e; /* Color del título */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            color: white; /* Color del texto */
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da; /* Borde */
+            border-radius: 3px; /* Bordes redondeados */
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #f2b4bf; /* Color de fondo del botón */
+            color: white; /* Color del texto del botón */
+            border: none;
+            border-radius: 3px; /* Bordes redondeados */
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Transición suave */
+        }
+
+            .form-group input[type="submit"]:hover {
+                background-color: #f4cfd6; /* Cambio de color al pasar el ratón */
+            }
+
+        .form-group textarea {
+            height: 100px; /* Altura fija del textarea */
+        }
+
+
+</style>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<div class="cont">
+<div class="containerImage">
+    <img id="imagenHome" src="~/Images/col.jpg" />
+        <div id="textoEncima" data-aos="fade-down-left">
+        <h1>Bienvenido A Tu Viniladora de Confianza</h1>
+        
+    </div>
+</div>
+
+
+
+    <div style="display: flex; flex-direction: column; align-items: center; background-color:">
+        <h2>Como son nuestros Productos</h2>
+        <div style="display: flex; margin-bottom: 50px;">
+            <div style="margin-right: 50px;border-radius:10px solid;" data-aos="fade-right"><img class="imagenHome" src="https://i.ibb.co/cwjDFkz/efe5658a-9d52-4f05-9f18-b06fa31397a8.jpg" width="300px" /></div>
+            <div data-aos="fade-left" style="max-width: 500px;color:black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et diam sit amet neque blandit sollicitudin.</div>
+        </div>
+
+        <div style="display: flex; margin-bottom: 50px;">
+            <div data-aos="fade-right" style="max-width: 500px;color:black;">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut varius turpis eu nisi fermentum, nec ullamcorper nunc tristique.</div>
+            <div style="margin-left: 50px;" data-aos="fade-left"><img class="imagenHome" src="https://i.ibb.co/TkZ4PW5/69c5a2c6-ff7e-47fe-85a8-db8c478a707e.jpg" width="300px" /></div>
+        </div>
+
+        <div style="display: flex; margin-bottom: 50px;">
+            <div style="margin-right: 50px;" data-aos="fade-right"><img class="imagenHome" src="https://i.ibb.co/Xt6H4C2/11055008-a4f6-4408-8bc3-9c1de332cb59.jpg" width="300px" /></div>
+            <div data-aos="fade-left" style="max-width: 500px;color:black;">Fusce sagittis velit non augue convallis, vel tincidunt mauris ullamcorper. Proin eu orci ut est lacinia posuere.</div>
+        </div>
+
+        <div style="display: flex; margin-bottom: 50px;">
+            <div data-aos="fade-right" style="max-width: 500px;color:black;">Nulla facilisi. Sed sit amet lacus in tellus tempus hendrerit. Sed vel nisl nec felis aliquet feugiat.</div>
+            <div style="margin-left: 50px;" data-aos="fade-left"><img class="imagenHome" src="https://i.ibb.co/tpmVY3G/15744cac-ad3e-4a7b-92c5-a7369c005789.jpg" width="300px" /></div>
+        </div>
+    </div>
+
+
+    <div class="containerImage">
+        <img id="imagenHome" src="~/Images/botes.jpg" />
+        <div id="textoEncima" data-aos="fade-down-left">
+            <h1 style="color:#ffcc4e">¿Tienes alguna sugerencia?</h1>
+
+        </div>
+    </div>
+
+    <div class="form-login">
+        <h2>Envianosla</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Ingrese su email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Nombre:</label>
+                <input type="text" id="Nombre" name="nombre" placeholder="Ingrese su nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Sugerencia:</label>
+                <textarea id="sugerencia" name="sugerencia" placeholder="Ingrese su Sugerencia" required style=" resize: none;"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Enviar Sugerencia">
+            </div>
+        </form>
+    </div>
+
+
+
+    
+        <h2 class="card-title" style="color: #007ce8;">¿Dónde nos puedes Encontrar?</h2>
+        <div style="width: 700px; height: 550px; padding: 40px; margin: 30px auto;  border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5138.114715707594!2d-3.6137080923066107!3d40.027624817530054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2ses!4v1709887196542!5m2!1ses!2ses" width="600" height="450" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    
+
+    </div>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    AOS.init({
+        
+    });
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

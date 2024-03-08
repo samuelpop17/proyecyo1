@@ -1,0 +1,101 @@
+﻿@model ProyectoMvcVinilacion.Models.Usuario
+
+@{
+    ViewData["Title"] = "Perfil";
+    var userRolClaim = User.FindFirst("id");
+    var userId = userRolClaim?.Value;
+}
+
+<style>
+    .cont {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .form-container {
+        width: 50%;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color:black;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: black;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="cont">
+    <div class="form-container">
+        <h1>Update</h1>
+        <form method="post" asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdUsuario" class="control-label"></label>
+                <input asp-for="IdUsuario" class="form-control" name="id" readonly />
+                <span asp-validation-for="IdUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contraseña" class="control-label"></label>
+                <input asp-for="Contraseña" class="form-control" name="contraseña" />
+                <span asp-validation-for="Contraseña" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" name="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" name="nombre" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" name="apellido" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" />
+            </div>
+        </form>
+        <a asp-action="Perfil" asp-controller="Account" asp-route-id="@userId">Volver</a>
+        @if (ViewData["MENSAJE"] != null)
+        {
+            <h1>@ViewData["MENSAJE"]</h1>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

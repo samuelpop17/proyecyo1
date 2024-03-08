@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,400i,600");
+
+body {
+    font-family: Poppins;
+    background-size: 100vw;
+    background-color: white;
+    margin: 0px;
+    padding: none;
+    color: white;
+    overflow-x: hidden;
+}
+
+nav {
+    transition: backdrop-filter 0.3s ease;
+    display: flex;
+    background-color: #f2b4bf;
+    padding: 0px;
+    justify-content: center;
+    z-index: 1;
+    backdrop-filter: blur( 2px ); /* Disable this to have a Macos-like top bar
+	border-radius: 0px 0px 10px 10px;
+	border-top: none;
+	margin-left: 50px;
+	margin-right: 50px;*/
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 10px 10px rgba(0, 20, 50, 0.1);
+    min-height: 50px;
+    width: 100vw;
+    align-items: center;
+}
+
+    nav:hover {
+        backdrop-filter: blur(8px);
+    }
+
+    nav a {
+        z-index: 2;
+        transition: border 0.2s ease;
+        text-decoration: none;
+        color: white;
+        padding: 15px;
+        padding-bottom: 3px;
+        padding-top: 3px;
+        margin-left: 5px;
+        border: 1px solid rgba(255, 255, 255, 0);
+        border-radius: 999px;
+    }
+
+        nav a:hover {
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
+        }
+
+h1 {
+    margin: 50px;
+    font-size: 50px;
+    font-weight: 600;
+}
+
+button {
+    transition: backdrop-filter 0.3s ease;
+    font-family: poppins;
+    margin-left: 50px;
+    border: none;
+    border-radius: 9999px;
+    padding: 10px 32px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: rgba(200, 210, 250, 0.2);
+    backdrop-filter: blur(2px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+    button:hover {
+        backdrop-filter: blur(8px);
+    }
+
+p {
+    margin: 50px;
+    margin-top: -50px;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+
+
+.footer {
+    position: relative; /* Fija la posición del pie de página */
+    bottom: 0; /* Lo coloca al final de la ventana del navegador */
+    width: 100%; /* Ocupa todo el ancho de la ventana */
+    background-color: #f2b4bf;
+    color: #fff;
+    padding: 30px 0;
+    z-index: 999; /* Asegura que esté por encima del contenido */
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+}
+
+
+.footer-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+    .footer-menu li {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+        .footer-menu li:last-child {
+            margin-right: 0;
+        }
+
+    .footer-menu a {
+        color: black;
+        text-decoration: none;
+    }
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .social-icons li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+        .social-icons li:last-child {
+            margin-right: 0;
+        }
+
+    .social-icons a {
+        color: black;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+.footer-bottom {
+    color:black;
+    margin-top: 20px;
+    text-align: center;
+}
+
+    .footer-bottom p {
+        margin: 0;
+    }
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: repeat(1, 1fr);
+        row-gap: 20px;
+    }
+
+    .footer-menu {
+        text-align: left;
+    }
+
+        .footer-menu li {
+            display: block;
+            margin-bottom: 10px;
+        }
+}
+
+.attribute {
+    position: absolute;
+    bottom: 10px;
+}

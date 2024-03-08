@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MvcProyectoVinilos.Models.Comentario>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<style>
+    .table {
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 20px;
+        border-collapse: collapse;
+        margin-bottom:70px;
+    }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        .table td {
+            text-align: left;
+        }
+
+            .table td:last-child {
+                text-align: center;
+            }
+
+            .table td a {
+                color: #007bff;
+                text-decoration: none;
+            }
+
+                .table td a:hover {
+                    text-decoration: underline;
+                }
+</style>
+
+<h1 style="color:black;text-align:center">Comentarios</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdComentario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreUusario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdComentario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreUusario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Coment)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new {  id=item.IdComentario  })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

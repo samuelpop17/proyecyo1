@@ -1,0 +1,81 @@
+﻿@model List<Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        color:black
+    }
+    body{
+        background-image: url('https://i.ibb.co/znGwkc1/fondo-Register.jpg'); /* Ruta de la imagen de fondo */
+        background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
+        background-position: center; /* La imagen de fondo se centrará horizontalmente y verticalmente */
+    }
+    .con {
+        flex-basis: calc(33.33% - 40px); /* Ajustar según el margen */
+        margin-bottom: 40px;
+        
+    }
+
+    .card {
+        background-color: white;
+        box-shadow: 5px 5px 20px #222;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+        .card:hover {
+            box-shadow: 5px 5px 30px #888;
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin: 5px 0;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .card a {
+            display: inline-block;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #0081ec;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<h1 style="text-align:center; padding:25px; color:black">Lista de Productos</h1>
+<div class="container">
+    
+    @foreach (var producto in Model)
+    {
+        <div class="con">
+            <div class="card">
+                <img src="@producto.Imagen" alt="@producto.Nombre">
+                <h3>@producto.Nombre</h3>
+               
+                <p>Precio: $@producto.Precio</p>
+                <a asp-action="Details" asp-controller="Productos" asp-route-id="@producto.ProductoId">Detalles del Producto</a>
+            </div>
+        </div>
+    }
+</div>

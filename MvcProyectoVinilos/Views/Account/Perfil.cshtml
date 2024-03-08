@@ -1,0 +1,136 @@
+﻿@model ProyectoMvcVinilacion.Models.Usuario
+s
+@{
+    ViewData["Title"] = "Perfil";
+    var userRolClaim = User.FindFirst("rol");
+    var userRol = userRolClaim?.Value;
+}
+<style>
+
+    .cont {
+        width: 50%;
+        height:100%;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        color:black;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        
+        color:black;
+    }
+
+    .user-info {
+        margin-bottom: 20px;
+    }
+
+        .user-info label {
+            font-weight: bold;
+        }
+
+        .user-info p {
+            margin: 5px 0;
+        }
+
+        .user-info::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .user-info p {
+            float: left;
+            width: 50%;
+        }
+
+        .user-info label {
+            float: left;
+            width: 50%;
+        }
+
+    select {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        width: 200px;
+        appearance: none; /* Oculta la flecha del select en algunos navegadores */
+    }
+
+    /* Estilo para las opciones del select */
+    option {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    /* Estilo para cuando el select está enfocado */
+    select:focus {
+        outline: none; /* Quita el borde azul al enfocar */
+        border-color: #007bff; /* Cambia el color del borde al enfocar */
+    }
+</style>
+
+@if (userRol == "1")
+{
+    <h1 style="margin:20px;">Bienvenido Administrador</h1>
+}
+else
+
+{
+    <h1>Bienvenido usuario corriente</h1>
+}
+
+<div class="cont">
+    <h1>Datos del Usuario</h1>
+    <div class="user-info">
+        <label>ID Usuario:</label>
+        <p>@Model.IdUsuario</p>
+        <label>Contraseña:</label>
+        <p>@Model.Contraseña</p>
+        <label>Email:</label>
+        <p>@Model.Email</p>
+        <label>Nombre:</label>
+        <p>@Model.Nombre</p>
+        <label>Apellidos:</label>
+        <p>@Model.Apellidos</p>
+        
+    </div>
+    <hr />
+
+    <h2>Opciones</h2>
+    <ul class="">
+        <li> <a class="dropdown-item" asp-controller="Account" asp-action="Update" asp-route-id="@Model.IdUsuario">Editar datos personales</a></li>
+
+        @if (userRol == "1")
+        {
+
+            <li>
+                <a class="dropdown-item" asp-controller="Account" asp-action="Sugerencias" asp-route-id="@Model.IdUsuario">Sugerencias  de la pagina</a>
+            </li>
+            <li>
+                <a class="dropdown-item" asp-controller="Comentarios" asp-action="List">Comentarios de la pagina</a>
+            </li>
+
+        }
+        else
+
+        {
+            
+
+        }
+       
+        
+    </ul>
+
+
+   
+</div>
+   
+
+</div>
+
