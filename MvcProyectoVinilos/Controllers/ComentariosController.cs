@@ -13,11 +13,16 @@ namespace MvcProyectoVinilos.Controllers
             this.repo = repo;
         }
 
-        public IActionResult Blog()
+        public IActionResult Blog(int page = 1, int pageSize = 5)
         {
-            List<Comentario> comentarios=this.repo.GetComentarios();
-            return View(comentarios);
+            List<Comentario> comentarios = this.repo.GetComentarios();
+            var paginatedComentarios = comentarios.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
+            ViewBag.PageNumber = page;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalPages = Math.Ceiling((double)comentarios.Count / pageSize);
+
+            return View(paginatedComentarios);
         }
         [Authorize]
         [HttpPost]

@@ -29,7 +29,7 @@ namespace MvcProyectoVinilos.Controllers
             return View();
         }
 
-        public IActionResult car()
+        public IActionResult Contacto()
         {
             return View();
         }

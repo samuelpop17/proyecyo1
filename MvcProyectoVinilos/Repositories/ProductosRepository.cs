@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using MvcProyectoVinilos.Models;
 using ProyectoMvcVinilacion.Data;
 using System.Data;
@@ -61,5 +62,26 @@ namespace MvcProyectoVinilos.Repositories
             };
             return producto;
         }
+
+        public async Task<List<Producto>> GetCategoriasAsync(string nombreCategoria)
+        {
+            var nombreCategoriaParam = new SqlParameter("@NombreCategoria", nombreCategoria);
+
+            var categorias = await context.Productos
+                .FromSqlRaw("EXECUTE SP_PRODUCTOS_POR_CATEGORIA @NombreCategoria", nombreCategoriaParam)
+                .ToListAsync();
+
+            return categorias;
+        }
+
+
+        public List<Categoria> GetCategorias()
+        {
+            var categorias = this.context.Categorias.ToList();
+            return categorias;
+        }
+
+       
+
     }
 }

@@ -11,10 +11,11 @@ builder.Services.AddControllersWithViews();
 string connectionString = builder.Configuration.GetConnectionString("sqlconection");
 builder.Services.AddTransient<UsuarioRepository>();
 builder.Services.AddTransient<ProductosRepository>();
+builder.Services.AddTransient<CaritoRepository>();
 builder.Services.AddScoped<ComentarioRepository>();
 builder.Services.AddDbContext<WebContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => { });
-
+builder.Services.AddSession();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,7 +32,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

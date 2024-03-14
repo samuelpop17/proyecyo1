@@ -2,13 +2,14 @@
 
 @{
     ViewData["Title"] = "Detalles del Producto";
+    
 }
 
 <style>
     body {
-        background-image: url('https://i.ibb.co/znGwkc1/fondo-Register.jpg'); /* Ruta de la imagen de fondo */
+        background-image: url('https://i.ibb.co/2S6m6ST/v463-aum-81-abstractbackground.jpg'); /* Ruta de la imagen de fondo */
         background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
-        background-position: center; /* La imagen de fondo se centrará horizontalmente y verticalmente */
+        background-position: center;
     }
 
     .cont {
@@ -50,7 +51,7 @@
             font-weight:bold;        }
 
         .lado-derecho h5 {
-            font-size: 40px; /* Tamaño de letra más grande */
+            font-size: 30px; /* Tamaño de letra más grande */
             color: black; /* Color negro */
             margin-bottom: 10px; /* Espacio después de cada párrafo */
             padding-top:25px;
@@ -58,7 +59,7 @@
 
 
     .lado-izquierdo img {
-        width: 100%; /* La imagen ocupa todo el ancho disponible del lado izquierdo */
+        width: 80%; /* La imagen ocupa todo el ancho disponible del lado izquierdo */
         height: auto;
         border-radius: 10px;
     }
@@ -93,7 +94,9 @@
             <h2>@Model.Nombre</h2>
             <h5>Precio: $@Model.Precio</h5>
             <h5>Descripción: @Model.Descripcion</h5>
-            <a asp-controller="" asp-action="">Añadir al carro</a>
+            <a asp-controller="Productos" asp-action="Index" asp-route-id="@Model.ProductoId">Añadir al carro</a>
+            <a asp-action="Index" asp-controller="Productos" >Volver</a>
+
         </div>
     </div>
 </div>

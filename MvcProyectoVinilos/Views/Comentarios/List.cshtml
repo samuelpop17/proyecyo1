@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "List";
+    var userRolClaim = User.FindFirst("id");
+    var userId = userRolClaim?.Value;
 }
 
 <style>
@@ -85,3 +87,5 @@
         }
     </tbody>
 </table>
+
+<a asp-action="Perfil" asp-controller="Account" asp-route-id="@userId">Volver</a>

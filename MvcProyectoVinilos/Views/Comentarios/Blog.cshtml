@@ -8,6 +8,11 @@
 }
 
     <style >
+        body{
+        background-image: url('https://i.ibb.co/2S6m6ST/v463-aum-81-abstractbackground.jpg'); /* Ruta de la imagen de fondo */
+        background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
+        background-position: center;
+    }
     .blog {
         color: black;
         display: flex;
@@ -106,13 +111,18 @@
         .form-group textarea {
             height: 100px; /* Altura fija del textarea */
         }
+
+    
+    .pagination a:hover {
+        background-color: black; /* Cambiar el color de fondo cuando se pasa el mouse */
+        border-color: #0056b3; /* Cambiar el color del borde cuando se pasa el mouse */
+    }
+
             </style>
 
 <h2 style="text-align:center;color: #ffcc4e;">Algunos de los comentarios que nos deja la gente.</h2>
 <h5 style="text-align:center;color: black; max-width: 600px;margin: 0 auto;">Si tu tambien quiere comentar, al fondo de la pagina tienes un formulario, recuerda que tienes que estar registrado.</h5>
 <div class="blog" style="width: 65%; height: 90%; padding: 40px; margin: 30px auto;  border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);">
-
-    
 
     @foreach (Comentario com in Model)
     {
@@ -122,12 +132,25 @@
         </div>
     }
 
-
-
-
-
-
 </div>
+
+<div class="pagination" style="text-align: right; color: black; margin-top: 20px;margin-bottom:30px;margin-left:45%">
+    
+    @if (ViewBag.PageNumber > 1)
+    {
+        <a href="@Url.Action("Blog", new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize })" style="text-decoration: none; color: white; margin-right: 10px; background-color: #007ce8; padding: 8px 16px; border: 1px solid #007ce8; border-radius: 4px; cursor: pointer; display: inline-block;transition: background-color 0.3s">Anterior</a>
+    }
+
+    <span style="margin: 0 10px;">Página @ViewBag.PageNumber de @ViewBag.TotalPages</span>
+
+    @if (ViewBag.PageNumber < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("Blog", new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize })" style="text-decoration: none; color: white; margin-left: 10px; background-color: #007ce8; padding: 8px 16px; border: 1px solid #007ce8; border-radius: 4px; cursor: pointer; display: inline-block;transition: background-color 0.3s">Siguiente</a>
+    }
+    
+</div>
+
+
 
 
 
