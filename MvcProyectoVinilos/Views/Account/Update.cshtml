@@ -29,7 +29,7 @@
     h1 {
         text-align: center;
         margin-bottom: 20px;
-        color: black;
+        color: #ffcc4e;
     }
 
     .form-group {
@@ -40,9 +40,10 @@
         padding: 10px 20px;
         border: none;
         border-radius: 5px;
-        background-color: #007bff;
+        background-color: #ffcc4e;
         color: white;
         cursor: pointer;
+        
     }
 
     a {
@@ -85,8 +86,8 @@
                 <span asp-validation-for="Apellidos" class="text-danger"></span>
             </div>
             
-            <div class="form-group">
-                <input type="submit" value="Save" />
+            <div style="margin:10px auto;" class="form-group">
+                <input style="margin:10px auto;" type="submit" value="Save" />
             </div>
         </form>
         <a asp-action="Perfil" asp-controller="Account" asp-route-id="@userId">Volver</a>

@@ -2,53 +2,99 @@
 
 @{
     ViewData["Title"] = "Productos en Carrito";
+    var userIdClaim = User.FindFirst("id");
+    var userId = userIdClaim?.Value;
 }
+
 <style>
-    body{
-        background-image: url('https://i.ibb.co/2S6m6ST/v463-aum-81-abstractbackground.jpg'); /* Ruta de la imagen de fondo */
-        background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
-        background-position: center;
-        text-align:center;
+    .cont {
+        max-width: 800px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    h1 {
+        color: #333;
+        text-align: center;
+    }
+
+    .product-item {
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .product-image {
+        flex-shrink: 0;
+        border-radius: 5px;
+        margin-right: 15px;
+    }
+
+    .product-info {
+        flex-grow: 1;
+        color: black;
+    }
+
+    .btn {
+        padding: 5px 15px;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
     }
 </style>
-<h1 style="color:black;">Productos En Carrito </h1>
 
-<p>
-    <a asp-controller="Productos" asp-action="Index" class="btn btn-info">
-        Lista de Productos
-    </a>
-</p>
-
-@if (Model != null && Model.Any())
-{
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Precio</th>
-                
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+<form method="post" asp-action="ActualizarCarrito" asp-controller="Productos">
+    <div class="cont">
+        <h1>Productos En Carrito</h1>
+        <div style="text-align: center; margin: 70px 0;">
+            <a asp-controller="Productos" asp-action="Index" class="btn btn-info">Lista de Productos</a>
+        </div>
+        @if (Model != null && Model.Any()) { 
             @foreach (var producto in Model)
             {
-                <tr>
-                    <td>@producto.Nombre</td>
-                    
-                    <td>@producto.Precio €</td>
-                    <td>
-                        <a asp-controller="Productos" asp-action="CarritoList" asp-route-idEliminar="@producto.ProductoId" class="btn btn-danger">Eliminar</a>
-                        <a href="" class="btn btn-success">Comprar</a>
-                    </td>
-                </tr>
+                <div class="product-item">
+                    <img src="@producto.Imagen" alt="@producto.Nombre" class="product-image" style="width: 100px; height: 100px;">
+                    <div class="product-info">
+                        <strong>@producto.Nombre</strong> - @producto.Precio €
+                        <div>
+                            <label for="cantidad-@producto.ProductoId">Cantidad:</label>
+                            <input type="number" id="cantidad-@producto.ProductoId" name="cantidades[@producto.ProductoId]" value="1" min="1" />
+                        </div>
+                    </div>
+                    <a asp-controller="Productos" asp-action="CarritoList" asp-route-idEliminar="@producto.ProductoId" class="btn btn-danger">Eliminar</a>
+                </div>
+               
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <h2>@ViewData["MENSAJE"]</h2>
-}
-
-
+            <button type="submit" name="accion" value="comprar" class="btn btn-success">Comprar todo</button>
+        }
+        else
+        {
+            <h2 style="color:black ; margin-bottom:50px">No hay productos en tu carrito.</h2>
+        }
+       
+    </div>
+</form>

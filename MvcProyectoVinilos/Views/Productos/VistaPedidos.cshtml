@@ -1,0 +1,101 @@
+﻿@model List<MvcProyectoVinilos.Models.Pedido>
+
+@{
+    ViewData["Title"] = "Lista de Pedidos";
+    var userIdClaim = User.FindFirst("id");
+    var userId = userIdClaim?.Value;
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background-image: url('https://i.ibb.co/2S6m6ST/v463-aum-81-abstractbackground.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .table-container {
+        margin: 120px auto;
+        width: 80%;
+        max-width: 960px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #dee2e6;
+        text-align: left;
+        color: black;
+    }
+
+    th {
+        background-color: #ffcc4e;
+        color: black;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #f8f9fa;
+    }
+
+    .link-back {
+        display: inline-block;
+        background-color: #ffcc4e;
+        color: black;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        margin-top: 20px;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+        .link-back:hover {
+            background-color: #e6b800;
+            color: black;
+        }
+</style>
+
+<div class="table-container">
+    <h1 style="color:#ffcc4e">Lista de Pedidos</h1>
+    @if (Model != null && Model.Any())
+    {
+    <table>
+        <thead>
+            <tr>
+                <th>Pedido ID</th>
+                <th>Fecha del Pedido</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pedido in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => pedido.PedidoId)</td>
+                    <td>@Html.DisplayFor(modelItem => pedido.FechaPedido, "{0:dd/MM/yyyy}")</td>
+                    <td><a href="@Url.Action("VistaPedidosDetalles", "Productos", new { id = pedido.PedidoId })" class="link-back">Ver Detalles</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }else{
+   <h1 style="color:black;">Actualmente no tienes pedidos pedidos</h1>
+        <h2 style="color:black;padding-left:50px">Si quieres pedidos accede al apartado de productos</h2>
+    }
+    @if (userId != null)
+    {
+        <a href="@Url.Action("Perfil", "Account", new { id = userId })" class="link-back">Volver</a>
+    }
+    else
+    {
+        <a href="@Url.Action("Index", "Home")" class="link-back">Volver al Inicio</a>
+    }
+</div>

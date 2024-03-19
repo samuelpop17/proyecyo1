@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MvcProyectoVinilos.Models;
 using ProyectoMvcVinilacion.Data;
+using ProyectoMvcVinilacion.Models;
 using System.Data;
 
 namespace MvcProyectoVinilos.Repositories
@@ -81,7 +82,22 @@ namespace MvcProyectoVinilos.Repositories
             return categorias;
         }
 
-       
+       public async Task<List<Pedido>> GetPedidos(int id)
+        {
+
+            return await context.Pedidos
+             .Where(p => p.UsuarioId == id.ToString())
+             .ToListAsync();
+        }
+        public async Task<List<DetallePedido>> GetPedidosDetalles(int id)
+        {
+
+            return await context.DetallesPedido
+                         .Where(dp => dp.PedidoId == id)
+                         .Include(dp => dp.Producto) // Asegúrate de cargar la información del producto
+                         .ToListAsync();
+        }
+
 
     }
 }

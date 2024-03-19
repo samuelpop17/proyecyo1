@@ -1,0 +1,111 @@
+﻿@model MvcProyectoVinilos.Models.Pedido
+
+@{
+    ViewData["Title"] = "Confirmación de Pedido";
+}
+
+<style>
+    body{
+        background-image: url('https://i.ibb.co/2S6m6ST/v463-aum-81-abstractbackground.jpg'); /* Ruta de la imagen de fondo */
+        background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
+        background-position: center;
+    }
+    .cont {
+        width: 40%;
+        margin: 60px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .pedido-details {
+        text-align: left;
+        max-width: 600px;
+        margin: 0 auto;
+        color: black;
+    }
+
+        .pedido-details h2 {
+            color: #ffcc4e;
+        }
+
+        .pedido-details .product-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .pedido-details .product-image {
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+        }
+
+        .pedido-details .product-info {
+            flex-grow: 1;
+        }
+
+            .pedido-details .product-info strong {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .pedido-details .product-info input {
+                width: 50px;
+            }
+
+    .total {
+        margin-top: 20px;
+    }
+
+    .btn {
+        margin-top: 20px;
+    }
+
+    .link-back {
+        display: inline-block;
+        background-color: #ffcc4e; /* Usa el mismo color para el enlace de 'Volver' */
+        color: black; /* Asegura contraste con el color de fondo */
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        margin-top: 20px; /* Margen superior para separarlo de la tabla */
+        transition: background-color 0.2s ease-in-out;
+    }
+
+        .link-back:hover {
+            background-color: #e6b800; /* Oscurece ligeramente el botón al pasar el mouse */
+            color: black;
+        }
+</style>
+
+<div class="cont">
+    <div class="pedido-details">
+        <h2>Confirmación de Pedido</h2>
+
+        <div>
+            <h4>Pedido ID: @Model.PedidoId</h4>
+            <div>Fecha del Pedido: @Model.FechaPedido.ToString("dd/MM/yyyy")</div>
+            <h3>Detalles del Pedido:</h3>
+            @foreach (var detalle in Model.Detalles)
+            {
+                <div class="product-item">
+                    <img src="@detalle.Producto.Imagen" alt="@detalle.Producto.Nombre" class="product-image" />
+                    <div class="product-info">
+                        <strong>@detalle.Producto.Nombre</strong>  Precio: @detalle.Precio €
+                        <div>
+                            Cantidad: @detalle.Cantidad
+                        </div>
+                        SubTotal @(detalle.Precio * detalle.Cantidad)
+                    </div>
+                </div>
+            }
+            <hr />
+            <h4 class="total">Total: @Model.Detalles.Sum(item => item.Precio * item.Cantidad) $</h4>
+        </div>
+
+        <a href="@Url.Action("Index", "Productos")" class="link-back">Volver a la tienda</a>
+
+    </div>
+</div>

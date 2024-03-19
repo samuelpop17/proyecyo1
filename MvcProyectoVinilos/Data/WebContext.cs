@@ -17,5 +17,7 @@ namespace ProyectoMvcVinilacion.Data
 
         public DbSet<Sugerencia> Sugerencias { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<DetallePedido> DetallesPedido { get; set; }
     }
 }

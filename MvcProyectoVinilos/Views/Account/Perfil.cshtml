@@ -1,38 +1,54 @@
 ﻿@model ProyectoMvcVinilacion.Models.Usuario
-s
+
 @{
     ViewData["Title"] = "Perfil";
     var userRolClaim = User.FindFirst("rol");
     var userRol = userRolClaim?.Value;
+
+    var userNameClaim = User.FindFirst("name");
+    var userName = userNameClaim?.Value;
 }
+
 <style>
-    body{
-        background-image: url('https://i.ibb.co/2S6m6ST/v463-aum-81-abstractbackground.jpg'); /* Ruta de la imagen de fondo */
-        background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
-        background-position: center;
-    }
-    .cont {
-        width: 50%;
-        height:100%;
-        margin: 50px auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        color:black;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    <style >
+    .center-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        
     }
 
-    h1 {
+
+    .cont {
+        margin: 50px auto;
+        background-color: #ffffff; /* Fondo blanco para el contenedor principal */
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        padding: 20px 40px; /* Ajusta el padding para menos altura y más anchura */
+        width: 100%; /* Asegura que use el máximo espacio disponible */
+        max-width: 700px; /* Ensancha el contenedor */
+        box-sizing: border-box; /* Asegura que el padding no afecte el ancho final */
+    }
+
+    h1, h2 {
+        color: #ffcc4e;
         text-align: center;
-        
-        color:black;
+        margin-top: 20px; /* Espaciado superior para el título */
+        margin-bottom: 20px; /* Reduce o elimina el margen inferior del título para menos altura */
     }
 
     .user-info {
-        margin-bottom: 20px;
+        background-color: #f8f9fa;
+        border-left: 4px solid #ffcc4e;
+        color: black;
+        padding: 15px; /* Ajusta según sea necesario para el contenido */
+        margin-bottom: 15px; /* Controla el espaciado entre los bloques de información */
     }
 
         .user-info label {
+            display: block; /* Hace que el label tome su propia línea */
+            margin: 0;
             font-weight: bold;
         }
 
@@ -40,101 +56,54 @@ s
             margin: 5px 0;
         }
 
-        .user-info::after {
-            content: "";
-            display: block;
-            clear: both;
-        }
-
-        .user-info p {
-            float: left;
-            width: 50%;
-        }
-
-        .user-info label {
-            float: left;
-            width: 50%;
-        }
-
-    select {
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
+    .options a {
+        display: block; /* Hace que los enlaces se muestren en bloques individuales para mejor accesibilidad */
+        text-decoration: none;
+        background-color: #f2b4bf;
+        color: white;
+        padding: 10px 15px;
         border-radius: 5px;
-        background-color: #fff;
-        width: 200px;
-        appearance: none; /* Oculta la flecha del select en algunos navegadores */
+        transition: background-color 0.2s ease-in-out;
+        margin-top: 10px;
+        text-align: center;
     }
 
-    /* Estilo para las opciones del select */
-    option {
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    /* Estilo para cuando el select está enfocado */
-    select:focus {
-        outline: none; /* Quita el borde azul al enfocar */
-        border-color: #007bff; /* Cambia el color del borde al enfocar */
-    }
+        .options a:hover {
+            background-color: #d895a3;
+        }
 </style>
 
-@if (userRol == "1")
-{
-    <h1 style="margin:20px;">Bienvenido Administrador</h1>
-}
-else
+</style>
 
-{
-    <h1>Bienvenido usuario corriente</h1>
-}
-
-<div class="cont">
-    <h1>Datos del Usuario</h1>
-    <div class="user-info">
-        <label>ID Usuario:</label>
-        <p>@Model.IdUsuario</p>
-        <label>Contraseña:</label>
-        <p>@Model.Contraseña</p>
-        <label>Email:</label>
-        <p>@Model.Email</p>
-        <label>Nombre:</label>
-        <p>@Model.Nombre</p>
-        <label>Apellidos:</label>
-        <p>@Model.Apellidos</p>
+<div class="center-wrapper">
+    <div class="cont">
+        <h1>@(userRol == "1" ? "Bienvenido Administrador" : "Bienvenido " + userName)</h1>
         
+        <div class="user-info">
+            <label>Email:</label>
+            <p>@Model.Email</p>
+        </div>
+        <div class="user-info">
+            <label>Nombre:</label>
+            <p>@Model.Nombre</p>
+        </div>
+        <div class="user-info">
+            <label>Apellidos:</label>
+            <p>@Model.Apellidos</p>
+        </div>
+
+        <div class="options">
+            <a asp-controller="Account" asp-action="Update" asp-route-id="@Model.IdUsuario">Editar datos personales</a>
+
+            @if (userRol == "1")
+            {
+                <a asp-controller="Account" asp-action="Sugerencias" asp-route-id="@Model.IdUsuario">Sugerencias de la página</a>
+                <a asp-controller="Comentarios" asp-action="List">Comentarios de la página</a>
+                <a asp-controller="Productos" asp-action="VistaPedidos" asp-route-id="0">Todos los Pedidos</a>
+            }else{
+            <a asp-controller="Productos" asp-action="VistaPedidos" asp-route-id="@Model.IdUsuario">Mis Pedidos</a>
+
+            }
+        </div>
     </div>
-    <hr />
-
-    <h2>Opciones</h2>
-    <ul class="">
-        <li> <a class="dropdown-item" asp-controller="Account" asp-action="Update" asp-route-id="@Model.IdUsuario">Editar datos personales</a></li>
-
-        @if (userRol == "1")
-        {
-
-            <li>
-                <a class="dropdown-item" asp-controller="Account" asp-action="Sugerencias" asp-route-id="@Model.IdUsuario">Sugerencias  de la pagina</a>
-            </li>
-            <li>
-                <a class="dropdown-item" asp-controller="Comentarios" asp-action="List">Comentarios de la pagina</a>
-            </li>
-
-        }
-        else
-
-        {
-            
-
-        }
-       
-        
-    </ul>
-
-
-   
 </div>
-   
-
-</div>
-

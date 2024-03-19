@@ -7,25 +7,21 @@
 }
 
 <style>
-    .cont{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80vh;
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background-image: url('https://i.ibb.co/2S6m6ST/v463-aum-81-abstractbackground.jpg'); /* Ruta de la imagen de fondo */
+        background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
+        background-position: center;
     }
 
     .table-container {
-        width: 70%;
+        margin: 40px auto;
+        width: 80%;
+        max-width: 960px;
+        background-color: #fff;
         padding: 20px;
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: black;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     table {
@@ -35,61 +31,60 @@
     }
 
     th, td {
+        padding: 12px;
         border: 1px solid #dee2e6;
-        padding: 8px;
         text-align: left;
+        color:black;
     }
 
     th {
-        background-color: #007bff;
-        color: white;
+        background-color: #ffcc4e; /* Aplica el color especificado al fondo de los encabezados */
+        color: black; /* Asegura que el texto sea legible sobre el fondo claro */
     }
 
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
+    tr:nth-child(odd) {
+        background-color: #f8f9fa;
     }
+
+    .link-back {
+        display: inline-block;
+        background-color: #ffcc4e; /* Usa el mismo color para el enlace de 'Volver' */
+        color: black; /* Asegura contraste con el color de fondo */
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        margin-top: 20px; /* Margen superior para separarlo de la tabla */
+        transition: background-color 0.2s ease-in-out;
+    }
+
+        .link-back:hover {
+            background-color: #e6b800; /* Oscurece ligeramente el botón al pasar el mouse */
+            color: black;
+        }
 </style>
 
-<div class="cont">
-    <div class="table-container">
-        <h1>Sugerencias</h1>
-        <table class="table">
-            <thead>
+<div class="table-container">
+    <h1 style="color:#ffcc4e">Sugerencias</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.First().IdSugerencia)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.First().SugerenciaTexto)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdSugerencia)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SugerenciaTexto)
-                    </th>
+                    <td>@Html.DisplayFor(modelItem => item.IdSugerencia)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SugerenciaTexto)</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdSugerencia)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SugerenciaTexto)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <a asp-action="Perfil" asp-controller="Account" asp-route-id="@userId">Volver</a>
+            }
+        </tbody>
+    </table>
+    <a href="@Url.Action("Perfil", "Account", new { id = userId })" class="link-back">Volver</a>
 </div>

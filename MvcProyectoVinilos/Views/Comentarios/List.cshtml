@@ -7,85 +7,133 @@
 }
 
 <style>
-    .table {
-        width: 70%;
-        margin: 0 auto;
-        margin-top: 20px;
-        border-collapse: collapse;
-        margin-bottom:70px;
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background-image: url('https://i.ibb.co/2S6m6ST/v463-aum-81-abstractbackground.jpg'); /* Ruta de la imagen de fondo */
+        background-size: cover; /* La imagen de fondo se ajustará al tamaño del div */
+        background-position: center;
     }
 
-        .table th,
-        .table td {
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
+    h1 {
+        color: #333; /* Texto del título en negro */
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .table-container {
+        width: 80%;
+        margin: 60px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            text-align: left;
         }
 
         .table th {
-            background-color: #f2f2f2;
-            text-align: left;
+            background-color: #ffcc4e; /* Encabezados en color especificado */
+            color: black; /* Texto del encabezado en negro */
         }
 
         .table td {
-            text-align: left;
+            color: black; /* Texto de los datos en negro */
         }
 
-            .table td:last-child {
-                text-align: center;
+        .table tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+
+        .table td a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            .table td a:hover {
+                text-decoration: underline;
             }
 
-            .table td a {
-                color: #007bff;
-                text-decoration: none;
-            }
+    .boton {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 3px #0056b3;
+    }
 
-                .table td a:hover {
-                    text-decoration: underline;
-                }
+        .boton:hover {
+            background-color: #0056b3;
+        }
+
+    .boton, .table td a {
+        margin-top: 20px; /* Asegura espacio adicional */
+        text-align: center; /* Centra el botón 'Volver' */
+    }
+
+    .link-back {
+        display: inline-block;
+        background-color: #ffcc4e; /* Usa el mismo color para el enlace de 'Volver' */
+        color: black; /* Asegura contraste con el color de fondo */
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        margin-top: 20px; /* Margen superior para separarlo de la tabla */
+        transition: background-color 0.2s ease-in-out;
+    }
+
+        .link-back:hover {
+            background-color: #e6b800; /* Oscurece ligeramente el botón al pasar el mouse */
+            color:black;
+        }
 </style>
 
-<h1 style="color:black;text-align:center">Comentarios</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdComentario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreUusario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Coment)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-container">
+    <h1 style="color:#ffcc4e; font-weight:bold;padding-bottom:20px">Comentarios</h1>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdComentario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombreUusario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdUsuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Coment)
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete", new {  id=item.IdComentario  })
-                </td>
+                <th>@Html.DisplayNameFor(model => model.First().IdComentario)</th>
+                <th>@Html.DisplayNameFor(model => model.First().NombreUusario)</th>
+                <th>@Html.DisplayNameFor(model => model.First().IdUsuario)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Coment)</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.IdComentario)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NombreUusario)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdUsuario)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Coment)</td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdComentario }, new { @class = "link-delete" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<a asp-action="Perfil" asp-controller="Account" asp-route-id="@userId">Volver</a>
+    <div style="text-align:center;">
+        <a href="@Url.Action("Perfil", "Account", new { id = userId })" class="link-back">Volver</a>
+    </div>
+</div>
